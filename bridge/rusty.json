@@ -1,0 +1,27 @@
+{
+  "name": "libsql_bridge",
+  "version": "0.1.0",
+  "edition": "2021",
+  "targets": {
+    "lib": "src/lib.rs"
+  },
+  "dependencies": {
+    "libsql": "0.9.30",
+    "tokio": "1"
+  },
+  "features": {
+    "libsql": [
+      "core",
+      "replication",
+      "tls"
+    ],
+    "tokio": [
+      "rt",
+      "macros"
+    ]
+  },
+  "test": [
+    "**/*.test.rs",
+    "tests/**/*.rs"
+  ]
+}

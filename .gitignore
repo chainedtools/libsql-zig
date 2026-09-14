@@ -1,0 +1,16 @@
+.zig-cache
+.zig-cache/
+zig-cache/
+zig-out
+*env*
+target
+dist
+node_modules
+*venv*
+*.db
+*.db-journal
+/tmp/
+
+# rusty / cargo bridge build
+bridge/target/
+bridge/.rusty/

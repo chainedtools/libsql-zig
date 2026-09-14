@@ -1,0 +1,18 @@
+.{
+    .name = .zig_libsql,
+    .version = "0.2.1",
+    .fingerprint = 0xa33e2c7ccbc83fb2, // Changing this has security and trust implications.
+    .minimum_zig_version = "0.16.0",
+    .dependencies = .{},
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+        "vendor",
+        "LICENSE.md",
+        "README.md",
+        "AGENTS.md",
+        "docs",
+        "examples",
+    },
+}

@@ -1,0 +1,23 @@
+name: Setup Zig
+description: Install the pinned Zig toolchain (no system libsqlite3)
+
+inputs:
+  zig-version:
+    description: Zig version (must stay in sync with build.zig.zon minimum_zig_version)
+    required: false
+    default: "0.16.0"
+
+runs:
+  using: composite
+  steps:
+    - name: Install Zig
+      uses: mlugg/setup-zig@v2
+      with:
+        version: ${{ inputs.zig-version }}
+
+    - name: Verify Zig
+      shell: bash
+      run: |
+        set -euo pipefail
+        zig version
+        zig env

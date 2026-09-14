@@ -1,0 +1,59 @@
+# Sourcery — Graphite-aware config
+# https://docs.sourcery.ai/References/Legacy-Configuration/sourcery-yaml/
+# https://docs.sourcery.ai/Code-Review/Configuration/
+#
+# Graphite stacks: PRs often target trunk-KEY-N or a mid-stack parent, not only
+# master/main. The GitHub App reviews those PRs when installed on the repo.
+#
+# Dashboard (required once per workspace/repo if reviews seem limited to default):
+#   Sourcery → Review settings → allow reviews on all PR base branches
+#   (do not restrict to default branch only).
+#
+# Suggestion PRs: sourcery_branch uses {base_branch} = the *head* branch of the
+# PR under review, so fixes stack onto the Graphite branch (not forced to master).
+# Config is read from the repository default branch after merge.
+
+ignore:
+  - .git
+  - .venv
+  - venv
+  - node_modules
+  - vendor
+  - zig-pkg
+  - third_party
+  - zig-out
+  - dist
+  - build
+  - coverage
+  - __pycache__
+  - .local-backups
+  - "**/package-lock.json"
+  - "**/bun.lock"
+  - "**/bun.lockb"
+  - "**/*.min.js"
+  - "**/*.generated.*"
+  - "**/signatures/cla.json"
+
+refactor:
+  skip: []
+
+rules: []
+
+metrics:
+  quality_threshold: 25.0
+
+clone_detection:
+  min_lines: 3
+  min_duplicates: 2
+  identical_clones_only: false
+
+github:
+  labels: []
+  ignore_labels:
+    - sourcery-ignore
+    - skip-review
+    - do-not-review
+    - dependencies
+  request_review: author
+  # Stack-safe: branch name derived from the PR head (Graphite layer), not only trunk.
+  sourcery_branch: sourcery/{base_branch}

@@ -1,0 +1,75 @@
+# CodeRabbit — Graphite-aware review config
+# https://docs.coderabbit.ai/configuration/auto-review
+# https://docs.coderabbit.ai/reference/configuration
+#
+# Problem: default auto_review only targets the repo default branch (master/main).
+# Graphite stacks open PRs into:
+#   - trunk-KEY-N (issue trunks)
+#   - intermediate stack parents
+#   - land PRs into master/main
+# Fix: base_branches ".*" reviews every PR target. Default branch stays included.
+#
+# Manual: @coderabbitai review | @coderabbitai full review
+# Autofix stacked: @coderabbitai autofix stacked pr
+
+language: "en-US"
+
+reviews:
+  profile: chill
+  request_changes_workflow: false
+  high_level_summary: true
+  high_level_summary_in_walkthrough: true
+  poem: false
+  review_status: true
+  collapse_walkthrough: true
+  sequence_diagrams: false
+  estimate_code_review_effort: true
+  assess_linked_issues: true
+
+  path_filters:
+    - "!**/zig-pkg/**"
+    - "!**/third_party/**"
+    - "!**/vendor/**"
+    - "!**/node_modules/**"
+    - "!**/zig-out/**"
+    - "!**/.local-backups/**"
+    - "!**/package-lock.json"
+    - "!**/bun.lock"
+    - "!**/bun.lockb"
+    - "!**/*.lock"
+    - "!**/signatures/cla.json"
+    - "!**/graphite-base/**"
+
+  auto_review:
+    enabled: true
+    drafts: false
+    auto_incremental_review: true
+    # Pause noisy stacks after several reviewed commits; @coderabbitai review to resume.
+    auto_pause_after_reviewed_commits: 8
+    # Review PRs targeting ANY base (Graphite mid-stack + issue trunks + default).
+    base_branches:
+      - ".*"
+    ignore_title_keywords:
+      - "WIP"
+      - "DO NOT MERGE"
+      - "[skip review]"
+      - "[skip cr]"
+    labels:
+      - "!do-not-review"
+      - "!skip-review"
+    ignore_usernames:
+      - "renovate[bot]"
+      - "dependabot[bot]"
+      - "github-actions[bot]"
+      - "graphite-app[bot]"
+      - "linear[bot]"
+      - "sourcery-ai[bot]"
+
+  finishing_touches:
+    autofix:
+      enabled: true
+    fix_ci:
+      enabled: true
+
+chat:
+  auto_reply: true

@@ -1,0 +1,128 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": [
+    "Graphite-compatible Renovate config.",
+    "PRs target ONLY the default branch ($default). Never open updates against trunk-KEY-N or mid-stack bases \u2014 that fights Graphite.",
+    "Merge with Graphite (or squash into default). Do not use GitHub merge queue for stacked human work."
+  ],
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    ":label(dependencies)"
+  ],
+  "baseBranchPatterns": [
+    "$default"
+  ],
+  "useBaseBranchConfig": "none",
+  "labels": [
+    "dependencies",
+    "renovate"
+  ],
+  "addLabels": [
+    "dependencies"
+  ],
+  "assigneesFromCodeOwners": false,
+  "reviewersFromCodeOwners": false,
+  "platformAutomerge": false,
+  "automerge": false,
+  "rebaseWhen": "conflicted",
+  "pruneStaleBranches": true,
+  "dependencyDashboardTitle": "Renovate Dependency Dashboard",
+  "dependencyDashboardLabels": [
+    "dependencies"
+  ],
+  "commitMessagePrefix": "chore(deps):",
+  "branchPrefix": "renovate/",
+  "additionalBranchPrefix": "",
+  "commitBodyTable": true,
+  "rangeStrategy": "bump",
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/bower_components/**",
+    "**/vendor/**",
+    "**/zig-pkg/**",
+    "**/third_party/**",
+    "**/zig-out/**",
+    "**/.local-backups/**",
+    "**/examples/**",
+    "**/testdata/**"
+  ],
+  "ignoreDeps": [],
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": [
+      "security",
+      "dependencies"
+    ]
+  },
+  "packageRules": [
+    {
+      "description": "Group GitHub Actions \u2014 one PR, easy Graphite land",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "groupName": "github-actions",
+      "labels": [
+        "dependencies",
+        "ci",
+        "renovate"
+      ]
+    },
+    {
+      "description": "Group npm minor/patch",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "groupName": "npm non-major",
+      "labels": [
+        "dependencies",
+        "renovate"
+      ]
+    },
+    {
+      "description": "Isolate npm majors for review",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "labels": [
+        "dependencies",
+        "renovate",
+        "major"
+      ]
+    },
+    {
+      "description": "Ignore internal / unpublished workspace packages",
+      "matchPackageNames": [
+        "/^@solvedgg\\//",
+        "/^@umcp\\//",
+        "/^@trunker\\//"
+      ],
+      "enabled": false
+    },
+    {
+      "description": "Do not touch Graphite temporary base branches if ever matched",
+      "matchBaseBranches": [
+        "/graphite-base/.*/"
+      ],
+      "enabled": false
+    }
+  ],
+  "prBodyNotes": [
+    "Targets the **repository default branch** only (Graphite-safe).",
+    "Do not retarget this PR onto `trunk-*` issue trunks or mid-stack branches.",
+    "Prefer merging with Graphite or a single squash into the default branch.",
+    "CodeRabbit/Sourcery auto-review is skipped for renovate[bot] (see `.coderabbit.yaml` / `.sourcery.yaml`)."
+  ],
+  "prFooter": "\\n---\\nGraphite workflow: https://graphite.com/docs \u00b7 PMS WORKFLOW.md",
+  "prHourlyLimit": 5,
+  "prConcurrentLimit": 5,
+  "branchConcurrentLimit": 5
+}

@@ -1,0 +1,20 @@
+# Vendored libSQL amalgamation (local engine for R3b WAL inject)
+
+source: https://github.com/tursodatabase/libsql (libsql-ffi/bundled/src)
+libsql_version: 0.2.3
+git_ref: main
+git_commit: 6f451a1fabacbcbc9960b232b4c1605a5021979b
+bundled_path: libsql-ffi/bundled/src/
+
+files:
+  sqlite3.c     sha256:0eb52e017a09ddb955a7fbaa5c2e5c39ed238f7480ec485e45f64fbb624ee7fb
+  sqlite3.h     sha256:ee6eab8416938332fb2aa93e257a07773cb2721661a293ce4e227c7a1ea9aa63
+  sqlite3ext.h  sha256:79b7bb7d2e25a7c7b0960d25a2be07e49f1f9cfd54b869214592e93b37c26914
+
+license: MIT / public-domain SQLite core (see upstream LICENSE.md)
+
+notes:
+  - Compiled by Zig when -Dengine=libsql (not system libsqlite3).
+  - Default engine remains stock SQLite (vendor/sqlite3.c); see docs/libsql-engine.md.
+  - Required for classic replica WAL inject (R3b); stock SQLite cannot inject frames.
+  - Do not edit these files by hand; bump via a deliberate version pin.

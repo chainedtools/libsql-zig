@@ -1,0 +1,16 @@
+# Vendored SQLite amalgamation (local backend)
+
+source: https://www.sqlite.org/2025/sqlite-amalgamation-3490100.zip
+version: 3.49.1
+SQLITE_VERSION_NUMBER: 3049001
+
+files:
+  sqlite3.c  sha256:ff80c36ef1bb44eb357c7ff1d15be77540d41c28fb671088215a6cd12785c5d3
+  sqlite3.h  sha256:88da6f1963bc192dfa18a3a48b423cf1fbbb04f903202efe9a78e3a597473e18
+
+license: public domain (see https://www.sqlite.org/copyright.html)
+
+notes:
+  - Compiled by Zig (not system libsqlite3).
+  - libSQL-specific extensions / Hrana remote are separate (see docs/ROADMAP.md).
+  - Do not edit these files by hand; bump via a deliberate version pin.
