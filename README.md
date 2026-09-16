@@ -83,7 +83,7 @@ while (try stmt.step()) |row| {
 ### Depend (production)
 
 ```sh
-zig fetch --save https://github.com/solvedggorg/zig-libsql/archive/refs/tags/v0.2.1.tar.gz
+zig fetch --save https://sdks.chained.tools/libsql-zig/0.2.1/libsql-zig-0.2.1.tar.gz
 ```
 
 Resolves once `v0.2.0` is tagged; use a local path dep for pre-release development.

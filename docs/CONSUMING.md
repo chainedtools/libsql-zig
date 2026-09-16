@@ -12,7 +12,7 @@ How product toolchains (rusty, scripty, hasky, …) depend on this package.
 Prefer a **published GitHub tag** so builds are reproducible and offline after fetch:
 
 ```sh
-zig fetch --save https://github.com/solvedggorg/zig-libsql/archive/refs/tags/v0.2.1.tar.gz
+zig fetch --save https://sdks.chained.tools/libsql-zig/0.2.1/libsql-zig-0.2.1.tar.gz
 ```
 
 > The `v0.2.0` tarball resolves only after that release tag is published. Until then, use the [local path dep](#local-path-development-only) below and swap to the tag once it exists.
